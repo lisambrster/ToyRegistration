@@ -5,9 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tifffile as tiff
 
-image_path = './output-images/'
-
-def MakeVectorFieldImage(x_disp,y_disp,fname):
+def MakeVectorFieldImage(x_disp,y_disp,fname,image_path):
     #x, y = np.meshgrid(np.linspace(-5, 5, 10), np.linspace(-5, 5, 10))
     
     #u = 1
@@ -74,6 +72,8 @@ def Regularization(x_disp,y_disp):
 # main
 def main():
 
+    image_path = './output-images/'
+
     # compute regularization penalty from displacements
 
     # make vector field from ground truth displacements or predictions
@@ -99,7 +99,7 @@ def main():
     # min 0, max -.6
     print(x_disp.shape,y_disp.shape,np.max(x_disp),np.min(x_disp),np.max(y_disp),np.min(y_disp))
     fname = 'VectorFieldSmooth.jpg'
-    MakeVectorFieldImage(x_disp,y_disp,fname)
+    MakeVectorFieldImage(x_disp,y_disp,fname,image_path)
 
 if __name__ == "__main__":
     main()

@@ -6,9 +6,9 @@ Install dependencies with pip
 
 `pip install -r requirements.txt`
 
-Run with python
+Test it out - will create a directory `output-images/` and write images there
 
-`python GenerateSamples.py`
+`python main.py`
 
 ## What you can do
 
