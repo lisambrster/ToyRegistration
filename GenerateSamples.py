@@ -1,18 +1,11 @@
 # generate synthetic samples of 2D images, label masks, and class dicts
 
-import sys
 import numpy as np
-#import matplotlib
-#import matplotlib.pyplot as plt
-from glob import glob
-import json
 import tifffile as tiff
 import os
-#import cv2
 
 from scipy.ndimage.morphology import distance_transform_edt
-from skimage.segmentation import watershed, relabel_sequential
-from skimage.morphology import disk, binary_erosion, binary_closing
+from skimage.segmentation import watershed
 from scipy import ndimage as ndi
 import DrawVectorField
 
@@ -20,11 +13,6 @@ import DrawVectorField
 # n is the image size (nxn)
 # blob size - this inversely related to size (.8 is big, 5 is small)
 def generate_sample_3D(n=128,nBlobs=6, blob_size = 0.8, gaussian_noise_sd=5):
-    from scipy.ndimage.morphology import distance_transform_edt
-    from skimage.segmentation import watershed, relabel_sequential
-    from skimage.morphology import disk, binary_erosion, binary_closing
-    from scipy import ndimage as ndi
-
     center = tuple(np.random.randint(0, n, (3, nBlobs))) # random centers for each of m blobs
     #print('center y ',center[0][:])
     #print('center x ', center[1][:])
