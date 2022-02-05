@@ -1,6 +1,7 @@
 import numpy as np
 import tifffile as tiff
 import os
+import sys
 
 import DrawVectorField
 import GenerateSamples
@@ -8,6 +9,8 @@ import GenerateSamples
 #########################################################################
 # main
 def main():
+    args = sys.argv[1:]
+    
     image_path = ("./output-images/")
     if not os.path.exists(image_path):
         print("Directory for output images does not exist. Creating it at: " + image_path)
@@ -16,14 +19,12 @@ def main():
     np.random.seed(0)
 
     # test 3D
-    bTest3D = False
-    if bTest3D:
+    if len(args) > 0 and args[0] == '3D':
         x,y = GenerateSamples.generate_sample_3D()
         print(x.shape,y.shape)
         tiff.imsave(image_path + 'raw1.tif',x)
         tiff.imsave(image_path + 'label1.tif',y)
-        exit()
-    else:
+    elif len(args) > 0 and args[0] == 'jiggle':
         x,dvf = GenerateSamples.generate_sample_jiggle()
         print(x.shape,dvf.shape)
 
@@ -51,6 +52,10 @@ def main():
         #axs[1,0].imshow(x2,cmap='gray')
         #axs[1,1].imshow(y2,cmap='flag')
         #plt.show()
+    else:
+        x,y = GenerateSamples.generate_sample()
+        tiff.imwrite(image_path + 'raw1.tif', x)
+        tiff.imwrite(image_path + 'raw2.tif', y)
 
 if __name__ == "__main__":
     main()
