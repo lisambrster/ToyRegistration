@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tifffile as tiff
 
-image_path = '/mnt/home/lbrown/MyUnet/regnet/images/'
+image_path = './output-images/'
 
 def MakeVectorFieldImage(x_disp,y_disp,fname):
     #x, y = np.meshgrid(np.linspace(-5, 5, 10), np.linspace(-5, 5, 10))
