@@ -67,39 +67,3 @@ def Regularization(x_disp,y_disp):
     disp_vector = disp_vector[2:254, 2:254]
     average_MSD = np.mean(disp_vector) # mean over flattened array
     return average_MSD
-    
-#########################################################################
-# main
-def main():
-
-    image_path = './output-images/'
-
-    # compute regularization penalty from displacements
-
-    # make vector field from ground truth displacements or predictions
-    ground_truth = False
-    if ground_truth:
-        x_disp = tiff.imread(image_path + 'simreg-x.tif')
-        y_disp = tiff.imread(image_path + 'simreg-y.tif')
-
-    else:
-        x_disp = tiff.imread(image_path + 'disp-x-pred.tif')
-        y_disp = tiff.imread(image_path + 'disp-y-pred.tif')
-
-    x_disp = x_disp[2:258,2:258]
-    y_disp = y_disp[2:258,2:258]
-    print(np.mean(x_disp),np.mean(y_disp))
-
-    # compute regularization penalty from displacements
-    average_MSD = Regularization(x_disp,y_disp)
-    print(average_MSD)
-
-
-    # min 0, max .6
-    # min 0, max -.6
-    print(x_disp.shape,y_disp.shape,np.max(x_disp),np.min(x_disp),np.max(y_disp),np.min(y_disp))
-    fname = 'VectorFieldSmooth.jpg'
-    MakeVectorFieldImage(x_disp,y_disp,fname,image_path)
-
-if __name__ == "__main__":
-    main()
